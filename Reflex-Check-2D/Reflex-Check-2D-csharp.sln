@@ -1,7 +1,7 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2008
 
-Project("{8281788E-0D72-DA52-7B05-310F0AF5A5F5}") = "Reflex-Check", "Assembly-CSharp-vs.csproj", "{94DEAABF-D665-36D4-0578-14DB8928E471}"
+Project("{CC6BA654-1813-C90B-1F79-8BA36543A94B}") = "Reflex-Check-2D", "Assembly-CSharp-vs.csproj", "{BA46D19C-3E9A-71F0-B60A-B17E43A41D2B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,15 +9,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{94DEAABF-D665-36D4-0578-14DB8928E471}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{94DEAABF-D665-36D4-0578-14DB8928E471}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{94DEAABF-D665-36D4-0578-14DB8928E471}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{94DEAABF-D665-36D4-0578-14DB8928E471}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA46D19C-3E9A-71F0-B60A-B17E43A41D2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA46D19C-3E9A-71F0-B60A-B17E43A41D2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA46D19C-3E9A-71F0-B60A-B17E43A41D2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA46D19C-3E9A-71F0-B60A-B17E43A41D2B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-							GlobalSection(MonoDevelopProperties) = preSolution
+			GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1
