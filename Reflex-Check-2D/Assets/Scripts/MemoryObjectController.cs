@@ -36,7 +36,7 @@ public class MemoryObjectController : MonoBehaviour {
 
 				gameControl = GameObject.Find ("_GameController").GetComponent<GameController> ();
 
-				instanceNumber = Random.Range (1000, 9999999);
+				instanceNumber = Random.Range (1000.0f, 9999999.0f);
 		}
 	
 	// Update is called once per frame
