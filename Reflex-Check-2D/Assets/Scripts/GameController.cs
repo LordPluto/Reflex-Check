@@ -51,6 +51,8 @@ public class GameController : MonoBehaviour {
 	private int numTrials = 1;
 	private float[] trialPoints;
 	private int trialIndex;
+	
+	public ScoringController resultControl;
 
 	#endregion
 
@@ -81,6 +83,10 @@ public class GameController : MonoBehaviour {
 								}
 								if (trialIndex < numTrials - 1) {
 										InitGame ();
+								} else {
+										resultControl.enabled = true;
+					resultControl.setScores (trialPoints);
+										this.enabled = false;
 								}
 						}
 				}
