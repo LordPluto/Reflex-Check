@@ -36,7 +36,7 @@ public class GameController : MonoBehaviour {
 
 	private float targetInstanceNumber;
 
-	private float spawnTimer = 5.0f;
+	private float spawnTimer;
 
 	#endregion
 
@@ -56,6 +56,14 @@ public class GameController : MonoBehaviour {
 
 	#endregion
 
+	#region Display
+
+	public GUISkin gameSkin;
+
+	private bool showTrial;
+
+	#endregion
+
 	// Use this for initialization
 	void Start () {
 				trialIndex = -1;
@@ -69,6 +77,7 @@ public class GameController : MonoBehaviour {
 				guessSpeed += Time.deltaTime;
 
 				if (spawnTimer <= 0) {
+						showTrial = false;
 						if (memoryIndex < memoryObjectChoices.Length) {
 								spawnTimer = 3.0f;
 								memoryObjectChoices [memoryIndex].SetActive (true);
@@ -85,10 +94,19 @@ public class GameController : MonoBehaviour {
 										InitGame ();
 								} else {
 										resultControl.enabled = true;
-					resultControl.setScores (trialPoints);
+										resultControl.setScores (trialPoints);
 										this.enabled = false;
 								}
 						}
+				}
+		}
+
+	void OnGUI () {
+				if (gameSkin != null) {
+						GUI.skin = gameSkin;
+				}
+				if (showTrial) {
+						GUI.Label (new Rect (Screen.width / 2 - 50, 30, 100, 50), "Trial " + (trialIndex + 1));
 				}
 		}
 
@@ -111,6 +129,8 @@ public class GameController : MonoBehaviour {
 	 * Initialize the guessing variables. Sets everything to beginning - allows for multiple trials.
 	 * **/
 	private void InitGame () {
+				
+
 				List<GameObject> possibleChoices = new List<GameObject> ();					//All the possible choices.
 				possibleChoices.AddRange (possibleMemoryObjects);							//A List is used to facilitate removal of selections.
 		
@@ -119,17 +139,17 @@ public class GameController : MonoBehaviour {
 		
 				MemoryObjectController targetControl = targetObject.GetComponent<MemoryObjectController> ();
 				targetInstanceNumber = targetControl.getInstanceNumber ();
-				targetControl.turnOffGuess ();												//Set the target number and make sure this one can't be guessed.
+				targetControl.setTarget ();												//Set the target number and make sure this one can't be guessed.
 
 				targetObject.SetActive (false);
 		
 				possibleChoices.RemoveAt (randomObject);
 		
-				memoryObjectChoices = new GameObject[6];
+				memoryObjectChoices = new GameObject[2];
 		
 				float targetPosition = Random.Range (0.0f, 6.0f);							//Random position of the target object - can be outside of choices.
 		
-				for (int i = 0; i<6; i++) {													//Fill in the random choices.
+				for (int i = 0; i<2; i++) {													//Fill in the random choices.
 						if (i == (int)targetPosition) {
 								memoryObjectChoices [i] = targetObject;
 						} else {
@@ -154,6 +174,9 @@ public class GameController : MonoBehaviour {
 				scoreSpeed = 0;
 
 				trialIndex++;																//Go to the next trial.
+				showTrial = true;
+
+				spawnTimer = 5.0f;
 		}
 
 	/**
@@ -166,5 +189,21 @@ public class GameController : MonoBehaviour {
 				float pointsLost = ((100.0f / 1.75f) * speedDifference) * (float)(incorrectGuesses + 1);
 
 				return Mathf.Max (0.0f, Mathf.Floor (100.0f - pointsLost));
+		}
+
+	/**
+	 * Sets the number of trials.
+	 * **/
+	public void setTrialNum (int trialNum) {
+				numTrials = trialNum;
+		}
+
+	/**
+	 * Restarts the game from the top - nothing changes.
+	 * **/
+	public void Restart () {
+				trialIndex = -1;
+				InitGame ();
+				trialPoints = new float[numTrials];
 		}
 }
