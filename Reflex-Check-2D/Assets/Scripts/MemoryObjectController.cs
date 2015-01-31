@@ -9,7 +9,6 @@ using System.Collections;
  * private const float TimeLimit - time limit for object to be on screen.
  * private float timeRemaining - time remaining for the object to be on screen.
  * private bool objectGuessed - determines whether or not the object has been guessed as a match.
- * private bool isTarget - tells the script whether this is the target being displayed.
  * private GameController gameControl - allows the object to communicate with the game controller.
  * private float instanceNumber - used for instance identification (to see if the guess was correct)
  * 
@@ -24,7 +23,6 @@ public class MemoryObjectController : MonoBehaviour {
 	private float timeRemaining;
 
 	private bool objectGuessed;
-	private bool isTarget;
 	
 	private GameController gameControl;
 
@@ -43,7 +41,7 @@ public class MemoryObjectController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-				if (!isTarget && !objectGuessed && Input.GetKeyDown (KeyCode.Space)) {
+				if (!objectGuessed && Input.GetKeyDown (KeyCode.Space)) {
 						objectGuessed = true;
 						gameControl.notifyGuess (instanceNumber);
 				}
@@ -51,14 +49,9 @@ public class MemoryObjectController : MonoBehaviour {
 				timeRemaining -= Time.deltaTime;
 
 				if (timeRemaining <= 0.0f) {
-						timeRemaining = 2.0f;
-						objectGuessed = false;
-						if (isTarget) {
-								gameObject.SetActive (false);
-								isTarget = false;
-						} else {
-								Destroy (gameObject);
-						}
+			timeRemaining = 2.0f;
+			objectGuessed = false;
+						gameObject.SetActive (false);
 				}
 		}
 
@@ -78,9 +71,15 @@ public class MemoryObjectController : MonoBehaviour {
 
 	/**
 	 * Manually turns off the ability for this object to be guessed
-	 * the first time around.
 	 * **/
-	public void setTarget () {
-				isTarget = true;
+	public void turnOffGuess(){
+				objectGuessed = true;
+		}
+
+	/**
+	 * Manually turns on the ability for this object to be guessed
+	 * **/
+	public void turnOnGuess () {
+				objectGuessed = false;
 		}
 }

@@ -48,7 +48,6 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\GameController.cs" />
      <Compile Include="Assets\Scripts\MemoryObjectController.cs" />
-     <Compile Include="Assets\Scripts\MenuController.cs" />
      <Compile Include="Assets\Scripts\ScoringController.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.1/UnityEngine.UI.dll</HintPath>
