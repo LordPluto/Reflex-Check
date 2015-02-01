@@ -129,8 +129,6 @@ public class GameController : MonoBehaviour {
 	 * Initialize the guessing variables. Sets everything to beginning - allows for multiple trials.
 	 * **/
 	private void InitGame () {
-				
-
 				List<GameObject> possibleChoices = new List<GameObject> ();					//All the possible choices.
 				possibleChoices.AddRange (possibleMemoryObjects);							//A List is used to facilitate removal of selections.
 		
@@ -145,11 +143,11 @@ public class GameController : MonoBehaviour {
 		
 				possibleChoices.RemoveAt (randomObject);
 		
-				memoryObjectChoices = new GameObject[2];
+				memoryObjectChoices = new GameObject[6];
 		
 				float targetPosition = Random.Range (0.0f, 6.0f);							//Random position of the target object - can be outside of choices.
 		
-				for (int i = 0; i<2; i++) {													//Fill in the random choices.
+				for (int i = 0; i<6; i++) {													//Fill in the random choices.
 						if (i == (int)targetPosition) {
 								memoryObjectChoices [i] = targetObject;
 						} else {
@@ -196,6 +194,7 @@ public class GameController : MonoBehaviour {
 	 * **/
 	public void setTrialNum (int trialNum) {
 				numTrials = trialNum;
+				trialPoints = new float[numTrials];
 		}
 
 	/**

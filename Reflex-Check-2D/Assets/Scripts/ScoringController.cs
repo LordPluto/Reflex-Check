@@ -1,6 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/**
+ * ScoringController extends MonoBehaviour
+ * 
+ * Used in: Scoring object
+ * 
+ * public MenuController menuControl - used to reset and retry the game.
+ * private float[] scores - an array holding the scores.
+ * private float totalScore - the total score of the various trials.
+ * public GUISkin resultSkin - the GUI Skin used for custom boxes and buttons
+ * private Vector2 scrollPosition - used for the scroll bar if it's necessary
+ * 
+ * Overview: Displays the overall scores of the trials, as well as allowing
+ * the player to either restart or retry the trials.
+ * **/
 public class ScoringController : MonoBehaviour {
 
 	public MenuController menuControl;
@@ -14,8 +28,7 @@ public class ScoringController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		scores = new float[0];
-		totalScore = 0;
+
 	}
 	
 	// Update is called once per frame
@@ -64,6 +77,8 @@ public class ScoringController : MonoBehaviour {
 				setTrialNumber (trialScores.Length);
 
 				scores = (float[])trialScores.Clone ();
+
+				totalScore = 0;
 
 				foreach (float score in scores) {
 						totalScore += score;
