@@ -24,7 +24,8 @@ public class MenuController : MonoBehaviour {
 
 	enum MenuScreen{
 		mainScreen,
-		trialsScreen
+		trialsScreen,
+		tutorialScreen
 	}
 
 	private MenuScreen currentScreen;
@@ -67,6 +68,17 @@ public class MenuController : MonoBehaviour {
 								trialNum++;
 						}
 						if (GUI.Button (new Rect (Screen.width / 2 - 50, Screen.height / 2 + 75, 100, 50), "Start!")) {
+								currentScreen = MenuScreen.tutorialScreen;
+						}
+						break;
+				case MenuScreen.tutorialScreen:
+						GUI.Label (new Rect (Screen.width / 2 - 50, Screen.height / 2 - 125, 100, 50), "How to Play");
+
+						GUI.Label (new Rect (Screen.width / 2 - 300, Screen.height / 2 - 50, 600, 100),
+			           "An object will appear on the screen for two seconds. Press Spacebar the next time that object appears. " +
+								"Points are earned based on speed - react under half a second for full points.");
+
+						if (GUI.Button (new Rect (Screen.width / 2 - 60, Screen.height / 2 + 75, 120, 50), "Understood")) {
 								gameControl.enabled = true;
 								gameControl.setTrialNum (trialNum);
 								this.enabled = false;

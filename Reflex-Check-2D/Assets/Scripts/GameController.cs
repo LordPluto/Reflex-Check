@@ -77,7 +77,6 @@ public class GameController : MonoBehaviour {
 				guessSpeed += Time.deltaTime;
 
 				if (spawnTimer <= 0) {
-						showTrial = false;
 						if (memoryIndex < memoryObjectChoices.Length) {
 								spawnTimer = 3.0f;
 								memoryObjectChoices [memoryIndex].SetActive (true);
@@ -87,6 +86,9 @@ public class GameController : MonoBehaviour {
 						} else if (memoryIndex >= memoryObjectChoices.Length) {
 								if (correctGuess) {
 										trialPoints [trialIndex] = CalculateScore (scoreSpeed);
+								} else if (targetInstanceNumber == //The object wasn't
+										memoryObjectChoices [5].GetComponent<MemoryObjectController> ().getInstanceNumber ()) {		//in the lineup
+										trialPoints [trialIndex] = CalculateScore (0);
 								} else {
 										trialPoints [trialIndex] = 0;
 								}
@@ -98,6 +100,8 @@ public class GameController : MonoBehaviour {
 										this.enabled = false;
 								}
 						}
+				} else if (spawnTimer <= 3.0f) {
+						showTrial = false;
 				}
 		}
 
@@ -144,8 +148,8 @@ public class GameController : MonoBehaviour {
 				possibleChoices.RemoveAt (randomObject);
 		
 				memoryObjectChoices = new GameObject[6];
-		
-				float targetPosition = Random.Range (0.0f, 6.0f);							//Random position of the target object - can be outside of choices.
+
+				float targetPosition = Mathf.Floor (Random.Range (0, 7));							//Random position of the target object - can be outside of choices.
 		
 				for (int i = 0; i<6; i++) {													//Fill in the random choices.
 						if (i == (int)targetPosition) {
@@ -182,9 +186,9 @@ public class GameController : MonoBehaviour {
 	 * Based on a 100-point system.
 	 * **/
 	private float CalculateScore (float speed){
-				float speedDifference = Mathf.Max (0.0f, speed - 0.25f);
+				float speedDifference = Mathf.Max (0.0f, speed - 0.5f);
 
-				float pointsLost = ((100.0f / 1.75f) * speedDifference) * (float)(incorrectGuesses + 1);
+				float pointsLost = ((100.0f / 1.5f) * speedDifference) * (float)(incorrectGuesses + 1);
 
 				return Mathf.Max (0.0f, Mathf.Floor (100.0f - pointsLost));
 		}
